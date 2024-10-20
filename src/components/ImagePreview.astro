@@ -1,0 +1,12 @@
+---
+interface Props extends astroHTML.JSX.ImgHTMLAttributes {
+  src: string;
+  alt: string;
+}
+
+const { src, alt, ...props } = Astro.props;
+---
+
+<div class="image-preview-container">
+  <img src={src} alt={alt} class="preview-image cursor-pointer" {...props} />
+</div>

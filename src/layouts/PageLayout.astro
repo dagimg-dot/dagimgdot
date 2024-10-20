@@ -23,5 +23,144 @@ const { title, description } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <div id="fullscreen-container"></div>
   </body>
 </html>
+
+<style is:global>
+  #fullscreen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  #fullscreen-container.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .fullscreen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fullscreen-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(0.9);
+    transition:
+      opacity 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
+  }
+
+  .fullscreen-image.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  let fullscreenContainer: HTMLDivElement | null = null;
+
+  function setupImagePreviews() {
+    console.log("Setting up image previews");
+
+    fullscreenContainer = document.getElementById(
+      "fullscreen-container"
+    ) as HTMLDivElement;
+
+    function openFullscreen(src: string, alt: string) {
+      console.log("Opening fullscreen", src, alt);
+      if (fullscreenContainer) {
+        fullscreenContainer.innerHTML = `
+          <div class="fullscreen-overlay">
+            <img src="${src}" alt="${alt}" class="fullscreen-image">
+          </div>
+        `;
+        fullscreenContainer.classList.add("active");
+        setTimeout(() => {
+          const fullscreenImage =
+            fullscreenContainer?.querySelector(".fullscreen-image");
+          fullscreenImage?.classList.add("active");
+        }, 50);
+      }
+    }
+
+    function closeFullscreen() {
+      console.log("Closing fullscreen");
+      if (fullscreenContainer) {
+        const fullscreenImage =
+          fullscreenContainer.querySelector(".fullscreen-image");
+        fullscreenImage?.classList.remove("active");
+        fullscreenContainer.classList.remove("active");
+        setTimeout(() => {
+          fullscreenContainer!.innerHTML = "";
+        }, 300);
+      }
+    }
+
+    // Click events to open or close fullscreen
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (target.classList.contains("preview-image")) {
+        openFullscreen(
+          target.getAttribute("src") || "",
+          target.getAttribute("alt") || ""
+        );
+      } else if (
+        fullscreenContainer &&
+        (target === fullscreenContainer ||
+          target.classList.contains("fullscreen-overlay"))
+      ) {
+        closeFullscreen();
+      }
+    });
+
+    // Escape key to close fullscreen
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        fullscreenContainer?.classList.contains("active")
+      ) {
+        closeFullscreen();
+      }
+    });
+  }
+
+  // Clean up event listeners before reinitializing on page transition
+  function cleanUp() {
+    console.log("Cleaning up event listeners");
+    document.removeEventListener("click", setupImagePreviews);
+    document.removeEventListener("keydown", setupImagePreviews);
+    if (fullscreenContainer) {
+      fullscreenContainer.innerHTML = "";
+      fullscreenContainer.classList.remove("active");
+    }
+  }
+
+  // Reinitialize setup on page load and Astro page transition
+  document.addEventListener("DOMContentLoaded", setupImagePreviews);
+  document.addEventListener("astro:page-load", () => {
+    cleanUp();
+    setupImagePreviews();
+  });
+</script>

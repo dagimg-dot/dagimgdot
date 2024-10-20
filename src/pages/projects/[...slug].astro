@@ -6,6 +6,7 @@ import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
 import BackToPrev from "@components/BackToPrev.astro";
 import Link from "@components/Link.astro";
+import ImagePreview from "@components/ImagePreview.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
@@ -58,9 +59,38 @@ const { Content } = await project.render();
         )
       }
       <div>Built with {project.data.builtWith}</div>
+      {
+        project.data.images && project.data.images.length > 0 && (
+          <div class="image-grid animate mt-6">
+            {project.data.images.map((image) => (
+              <ImagePreview
+                src={image}
+                alt={project.data.title}
+                class="w-full h-auto object-cover aspect-video"
+              />
+            ))}
+          </div>
+        )
+      }
+      <span class="text-sm">You can click on the images to see the full size</span>
     </div>
     <article class="animate">
       <Content />
     </article>
   </Container>
 </PageLayout>
+
+<style>
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .image-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

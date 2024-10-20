@@ -5,12 +5,9 @@ date: "Oct 18 2024"
 repoURL: "https://github.com/dagimg-dot/contextify"
 demoURL: "https://contextify.netlify.app"
 builtWith: "React (with Typescript), Zustand, Shadcn UI, IndexedDB and Tailwind CSS"
+images: ["https://i.imgur.com/nUsEPRi.png", "https://i.imgur.com/ZM7DNhC.png"]
 ---
 
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-    <img style="width: 50%;" src="https://i.imgur.com/nUsEPRi.png" />
-    <img style="width: 50%;" src="https://i.imgur.com/ZM7DNhC.png" />
-</div>
 
 Contextify is a mini Gemini AI wrapper that allows you to search for meaning of words without losing the context with minimal effort.
 

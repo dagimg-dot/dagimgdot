@@ -5,9 +5,8 @@ date: "Jun 21 2024"
 repoURL: "https://github.com/dagimg-dot/ethyellow."
 demoURL: "https://ethyellow.netlify.app/"
 builtWith: "VueJS, Hasura, Docker and NodeJS (Express)"
+images: ["https://i.postimg.cc/fR4NvK78/image.png"]
 ---
-
-![EthYellow](https://i.postimg.cc/fR4NvK78/image.png)
 
 Ethiopian Yellow page website to serve you businesses for your day-to-day need and a platform for business owners to advertise their businesses.
 

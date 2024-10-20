@@ -4,9 +4,8 @@ description: "Exposes students information from the BDU SIMS Website"
 date: "Apr 27 2023"
 repoURL: "https://github.com/dagimg-dot/bdu-sims-api"
 builtWith: "NodeJS (Express)"
+images: ["https://i.postimg.cc/mktsmp65/Screenshot-from-2024-08-09-20-07-51.png"]
 ---
-
-![BDU Sims API](https://i.postimg.cc/mktsmp65/Screenshot-from-2024-08-09-20-07-51.png)
 
 This is Unofficial API for Bahir Dar University Student Information Management System built using JavaScript.
 

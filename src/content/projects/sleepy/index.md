@@ -4,9 +4,8 @@ description: "An android app to set a timer to close everything before you fall 
 date: "Jan 03 2023"
 repoURL: "https://github.com/dagimg-dot/Sleepy-App"
 builtWith: "Flutter"
+images: ["https://i.postimg.cc/W3zcXfdJ/Sleepy.png"]
 ---
-
-![Sleepy](https://i.postimg.cc/W3zcXfdJ/Sleepy.png)
 
 Sleepy is an Android application designed to help you wind down and prepare for a restful night's sleep. With this intuitive app, you can set a timer to automatically close distractions and enable a peaceful environment, ensuring you get the quality sleep you deserve.
 

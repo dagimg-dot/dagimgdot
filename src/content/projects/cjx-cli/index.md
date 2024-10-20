@@ -5,9 +5,8 @@ date: "Mar 17 2023"
 repoURL: "https://github.com/dagimg-dot/cjx-cli-tool"
 demoURL: "https://dagimg-dot.github.io/cjx-doc"
 builtWith: "Python"
+images: ["https://i.postimg.cc/0NMyNQC4/image.png"]
 ---
-
-![CJX CLI](https://i.postimg.cc/0NMyNQC4/image.png)
 
 CJX CLI is a command-line tool that simplifies the process of setting up your JavaFX development environment using VS Code as your IDE.
 

@@ -4,9 +4,8 @@ description: "Watch you local videos like tiktok"
 date: "Dec 19 2023"
 repoURL: "https://github.com/dagimg-dot/Vertideo"
 builtWith: "React and NodeJS (Express)"
+images: ["https://github.com/dagimg-dot/Vertideo/raw/main/screenshots/Screenshot_20240121_224319_Chrome.jpg"]
 ---
-
-<img height="300" width="300" src="https://github.com/dagimg-dot/Vertideo/raw/main/screenshots/Screenshot_20240121_224319_Chrome.jpg" />
 
 Vertideo is a video streaming web app that allows you to watch your local videos like tiktok.
 
