@@ -2,9 +2,8 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import { dateRange } from "@lib/utils";
 import { WORK } from "@consts";
-import Link from "@components/Link.astro";
+import WorkSnippet from "@components/WorkSnippet.astro";
 
 const collection = (await getCollection("work")).sort(
   (a, b) =>
@@ -24,29 +23,7 @@ const work = await Promise.all(
     <div class="space-y-10">
       <div class="animate font-semibold text-black dark:text-white">Work</div>
       <ul class="flex flex-col space-y-4">
-        {
-          work.map((entry) => (
-            <li class="animate">
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                <Link
-                  href={entry.data.companyWebsite!}
-                  underline={false}
-                  external={true}
-                >
-                  {" "}
-                  {entry.data.company}{" "}
-                </Link>
-              </div>
-              <div class="text-sm opacity-75">{entry.data.role}</div>
-              <article>
-                <entry.Content />
-              </article>
-            </li>
-          ))
-        }
+        {work.map((entry) => <WorkSnippet entry={entry} />)}
       </ul>
     </div>
   </Container>

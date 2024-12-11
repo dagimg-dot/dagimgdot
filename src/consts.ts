@@ -25,20 +25,25 @@ export const WORK: Metadata = {
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  DESCRIPTION:
+    "A collection of my projects, with links to repositories and demos.",
 };
 
 export const SOCIALS: Socials = [
   {
+    NAME: "myCorner",
+    HREF: "https://t.me/jdsteps",
+  },
+  {
     NAME: "telegram",
     HREF: "https://t.me/aion_ue",
   },
-  { 
+  {
     NAME: "github",
-    HREF: "https://github.com/dagimg-dot"
+    HREF: "https://github.com/dagimg-dot",
   },
-  { 
+  {
     NAME: "linkedin",
     HREF: "https://www.linkedin.com/in/dagim-astatkie-1743a1239",
-  }
+  },
 ];
