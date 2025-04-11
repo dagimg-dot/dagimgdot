@@ -11,6 +11,9 @@ Requirements:
 Usage:
     ./upload_images.py
 
+Or Using 'UV' and make:
+    make image
+
 The script will load environment variables from a .env file in the project root.
 Required variables: CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
 """
@@ -34,7 +37,7 @@ cloudinary.config(
 )
 
 # Regular expression to find Markdown image links ![alt](path)
-IMAGE_LINK_PATTERN = r"!\[.*?\]\((../../../../[^)]+)\)"
+IMAGE_LINK_PATTERN = r"!\[.*?\]\((static[^)]+)\)"
 
 
 def scan_directories(base_path: str) -> List[Path]:
@@ -98,7 +101,7 @@ def parse_markdown(file_path: Path) -> Tuple[str, List[str], frontmatter.Post, b
 
 def filter_images_to_upload(images: List[str]) -> List[Tuple[str, str]]:
     """
-    Filter images that need to be uploaded (start with ../../../../).
+    Filter images that need to be uploaded (start with static).
 
     Args:
         images: List of image paths from the frontmatter or content
@@ -108,9 +111,9 @@ def filter_images_to_upload(images: List[str]) -> List[Tuple[str, str]]:
     """
     to_upload = []
     for image in images:
-        if image.startswith("../../../../"):
+        if image.startswith("static"):
             # Convert relative path to absolute path
-            local_path = image.replace("../../../../", "")
+            local_path = image
             to_upload.append((image, local_path))
 
     return to_upload
@@ -145,7 +148,6 @@ def upload_to_cloudinary(
         public_id = f"{clean_title}-{timestamp}-{i + 1}"
 
         try:
-            # Upload to Cloudinary
             result = cloudinary.uploader.upload(
                 str(full_path), public_id=public_id, overwrite=True
             )
@@ -230,9 +232,8 @@ def main():
     if os.environ.get("CLOUDINARY_CLOUD_NAME") == "YOUR_CLOUD_NAME":
         print("Error: Cloudinary credentials not configured.")
         print(
-            "Please set the CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET environment variables."
+            "Please set the CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET in the .env file"
         )
-        print("For example: export CLOUDINARY_CLOUD_NAME=your-cloud-name")
         return
 
     if __file__.endswith("upload_images.py"):
@@ -242,6 +243,7 @@ def main():
 
     md_files = scan_directories(base_path)
     print(f"Found {len(md_files)} markdown files.")
+    print("Looking for images with 'static' prefix in your markdown files...")
 
     total_uploads = 0
     total_updates = 0
