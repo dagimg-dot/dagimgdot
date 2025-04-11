@@ -9,7 +9,7 @@ images: ["https://i.imgur.com/nUsEPRi.png", "https://i.imgur.com/ZM7DNhC.png"]
 ---
 
 
-Contextify is a mini Gemini AI wrapper that allows you to search for meaning of words without losing the context with minimal effort.
+Contextify is a mini Gemini AI wrapper that allows you to search for meaning of words without losing the context with minimal effort!
 
 ### Why ?
 
