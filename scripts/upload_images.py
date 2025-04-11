@@ -149,7 +149,10 @@ def upload_to_cloudinary(
 
         try:
             result = cloudinary.uploader.upload(
-                str(full_path), public_id=public_id, overwrite=True
+                str(full_path),
+                public_id=public_id,
+                overwrite=True,
+                folder="portfolio",
             )
 
             # Store the mapping between original path and new URL
