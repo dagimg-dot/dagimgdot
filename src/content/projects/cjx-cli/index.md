@@ -1,11 +1,12 @@
 ---
-title: "CJX CLI"
-description: "Setup your JavaFX development environment using VS Code as your IDE"
-date: "Mar 17 2023"
-repoURL: "https://github.com/dagimg-dot/cjx-cli-tool"
-demoURL: "https://dagimg-dot.github.io/cjx-doc"
-builtWith: "Python"
-images: ["https://i.postimg.cc/0NMyNQC4/image.png"]
+builtWith: Python
+date: Mar 17 2023
+demoURL: https://dagimg-dot.github.io/cjx-doc
+description: Setup your JavaFX development environment using VS Code as your IDE
+images:
+  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744381979/cjx-cli-1744381976-1.png
+repoURL: https://github.com/dagimg-dot/cjx-cli-tool
+title: CJX CLI
 ---
 
 CJX CLI is a command-line tool that simplifies the process of setting up your JavaFX development environment using VS Code as your IDE.

@@ -1,11 +1,12 @@
 ---
-title: "My Caps"
-description: "A taste of CapsLock's magic"
-date: "Aug 07 2024"
-repoURL: "https://github.com/dagimg-dot/myCaps"
-demoURL: "https://mycaps.netlify.app"
-builtWith: "React (with Typescript), Zustand, Shadcn UI and Tailwind CSS"
-images: ["https://i.postimg.cc/GhnRFKxq/image.png"]
+builtWith: React (with Typescript), Zustand, Shadcn UI and Tailwind CSS
+date: Aug 07 2024
+demoURL: https://mycaps.netlify.app
+description: A taste of CapsLock's magic
+images:
+  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744380900/my-caps-1744380897-1.png
+repoURL: https://github.com/dagimg-dot/myCaps
+title: My Caps
 ---
 
 MyCaps is a simple CapsLock Emulator I built in couple of days just to give you the taste of how I use my keyboard. Maybe you don't like it, but thanks for checking it out!

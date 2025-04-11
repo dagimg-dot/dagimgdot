@@ -1,10 +1,11 @@
 ---
-title: "BDU BOT"
-description: "A Telegram Bot for Bahir Dar University Students"
-date: "Sept 13 2022"
-repoURL: "https://github.com/dagimg-dot/BDU-bot"
-builtWith: "Python"
-images: ["https://i.postimg.cc/pL7fgykd/Screenshot-from-2024-08-25-23-40-35.png"]
+builtWith: Python
+date: Sept 13 2022
+description: A Telegram Bot for Bahir Dar University Students
+images:
+  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744382477/bdu-bot-1744382476-1.png
+repoURL: https://github.com/dagimg-dot/BDU-bot
+title: BDU BOT
 ---
 
 BDU BOT is a Telegram Bot that brings the Student Management System of Bahir Dar University to Telegram with some extra features.

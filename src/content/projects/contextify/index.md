@@ -1,13 +1,14 @@
 ---
-title: "Contextify"
-description: "Meaning of words without losing the context"
-date: "Oct 18 2024"
-repoURL: "https://github.com/dagimg-dot/contextify"
-demoURL: "https://contextify.netlify.app"
-builtWith: "React (with Typescript), Zustand, Shadcn UI, IndexedDB and Tailwind CSS"
-images: ["https://i.imgur.com/nUsEPRi.png", "https://i.imgur.com/ZM7DNhC.png"]
+builtWith: React (with Typescript), Zustand, Shadcn UI, IndexedDB and Tailwind CSS
+date: Oct 18 2024
+demoURL: https://contextify.netlify.app
+description: Meaning of words without losing the context
+images:
+  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744381364/contextify-1744381363-1.png
+  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744381365/contextify-1744381363-2.png
+repoURL: https://github.com/dagimg-dot/contextify
+title: Contextify
 ---
-
 
 Contextify is a mini Gemini AI wrapper that allows you to search for meaning of words without losing the context with minimal effort!
 
