@@ -1,10 +1,12 @@
 ---
-title: "Setting up your Gnome Extension Development Environment"
-description: "An easy and replicatable way to setup your gnome extension development env."
-date: "Jul 19 2024"
+date: Jul 19 2024
+description:
+  An easy and replicatable way to setup your gnome extension development
+  env.
+title: Setting up your Gnome Extension Development Environment
 ---
 
-![Gnome Website](https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fhs0oykjy54lq8lj71n6d.png)
+![Gnome Website](https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fhs0oykjy54lq8lj71n6d.png)
 
 When I first thought of developing a gnome extension I thought it would be as simple as all the other web projects I did before. Start the project with vite then develop using visual studio code and see changes in real time when you change your code. But it was more complicated than that.
 
@@ -25,7 +27,7 @@ So, for the first problem, I got a simple solution when I was bombarding the mat
 npm create gnome-extension@latest
 ```
 
-![Terminal](https://i.postimg.cc/XYWxsrH6/Pasted-image-20240719220752.png)
+![Terminal](https://res.cloudinary.com/drrfofxv2/image/upload/v1744384368/setting-up-your-gnome-extension-development-environment-1744384366-1.png)
 
 It will ask you some questions and finally create the extension for you. This is the GitHub repository for the project, if you want to check it out for yourself. [create-gnome-extension](https://github.com/Leleat/create-gnome-extension). This tool gives you a basic extension that you can build and install in your system. But hang in there don't build it yet, there is more configuration.
 
@@ -43,7 +45,7 @@ The Guest OS should be configured the following way.
 
 - Make the default display server x11/Xorg. In the login screen head to the right bottom corner and click the settings button. This is because gnome-shell restart without logging out and logging in is not possible in wayland.
 
-![Display Server](https://i.postimg.cc/DzjgfB27/Pasted-image-20240719225415.png)
+![Display Server](https://res.cloudinary.com/drrfofxv2/image/upload/v1744384369/setting-up-your-gnome-extension-development-environment-1744384366-2.png)
 
 - Install [Unsafe Mode Menu](https://github.com/linushdot/unsafe-mode-menu)
 
@@ -112,7 +114,7 @@ You need to run this command in the guest os inside the shared folder (which we 
 
 This is my dev environment (in the host machine) and the Guest OS. . .
 
-![Dev Environment](https://i.postimg.cc/sXMJM7X7/Pasted-image-20240719233454.png)
+![Dev Environment](https://res.cloudinary.com/drrfofxv2/image/upload/v1744384372/setting-up-your-gnome-extension-development-environment-1744384366-3.png)
 
 ![VM](https://miro.medium.com/v2/resize:fit:720/format:webp/1*Vw2LGjHLvEB2axkm8Zw33A.png)
 

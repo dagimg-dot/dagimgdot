@@ -4,7 +4,7 @@ description: "Explanation I wish I knew when I started learning CSS."
 date: "Jul 04 2023"
 ---
 
-![Flexbox](https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgm4khg94jfe720pa9qfi.png)
+![Flexbox](https://media2.dev.to/dynamic/image/width=1600,height=700,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgm4khg94jfe720pa9qfi.png)
 
 Have you ever wondered about the difference between the display values `block`, `flex`, `inline-flex` and `inline-block` ?
 
@@ -18,14 +18,14 @@ Let’s see what their difference is with an example to make it more clear. So, 
 
 ```html
 <div class="wrap">
-    <div class="child">1</div>
-    <div class="child">2</div>
-    <div class="child">3</div>
+  <div class="child">1</div>
+  <div class="child">2</div>
+  <div class="child">3</div>
 </div>
 <div class="wrap">
-    <div class="child">1</div>
-    <div class="child">2</div>
-    <div class="child">3</div>
+  <div class="child">1</div>
+  <div class="child">2</div>
+  <div class="child">3</div>
 </div>
 ```
 
@@ -33,20 +33,20 @@ Let’s add some css to spice it up.
 
 ```css
 .wrap {
-        /* display: flex; */ 
-        /* display: inline-flex; */
-                /* display: inline-block; */
-        border: 3px solid blue;
-        padding: 5px;
-        margin: 30px;
-    }
+  /* display: flex; */
+  /* display: inline-flex; */
+  /* display: inline-block; */
+  border: 3px solid blue;
+  padding: 5px;
+  margin: 30px;
+}
 
-    .child {
-        border: 2px solid green; 
-        margin: 5px 2px;
-        padding: 3px;
-        text-align: center;
-    }
+.child {
+  border: 2px solid green;
+  margin: 5px 2px;
+  padding: 3px;
+  text-align: center;
+}
 ```
 
 As you can see from the above **html** and **css**
