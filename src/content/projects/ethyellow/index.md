@@ -13,13 +13,14 @@ Ethiopian Yellow page website to serve you businesses for your day-to-day need a
 
 ## Features
 
-- Explore businesses based on categories and cities
-- Search businesses by name
-- View businesses details
-- View reviews
-- Add reviews
-
+- For users
+  - **User Authentication**: Users can sign up and login to the platform.
+  - **Explore businesses**: Users can explore businesses based on categories and cities.
+  - **Search businesses**: Users can search businesses by name.
+  - **View businesses details**: Users can view businesses details.
+  - **View reviews**: Users can view reviews.
+  - **Add reviews**: Users can add reviews.
 - For business owners
-  - Add businesses
-  - Edit businesses
-  - Delete businesses
+  - **Add businesses**: Business owners can add their businesses to the platform.
+  - **Edit businesses**: Business owners can edit their businesses.
+  - **Delete businesses**: Business owners can delete their businesses.

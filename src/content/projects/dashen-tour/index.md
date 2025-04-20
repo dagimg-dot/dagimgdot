@@ -13,5 +13,12 @@ Dashen Tour is a tour booking platform that allows you to book tours to your fav
 
 ### Features
 
-- **User Authentication**: Users can sign up and login to the platform.
-- **Tour Booking**: Users can book tours to their favorite places.
+- For users
+  - **User Authentication**: Users can sign up and login to the platform.
+  - **Tour Booking**: Users can book tours to their favorite places.
+  - **View tours**: Users can view tours.
+  - **View top destinations**: Users can view top destinations.
+- For admins
+  - **Add tours**: Admins can add tours to the platform.
+  - **Edit tours**: Admins can edit tours.
+  - **Delete tours**: Admins can delete tours.
