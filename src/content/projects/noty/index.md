@@ -3,9 +3,10 @@ builtWith: GTK4, Python
 date: Apr 11 2025
 description: A minimal keyboard driven note application
 images:
-  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744387021/portfolio/noty-1744387020-1.png
-  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744387022/portfolio/noty-1744387020-2.png
-  - https://res.cloudinary.com/drrfofxv2/image/upload/v1744387023/portfolio/noty-1744387020-3.png
+- https://res.cloudinary.com/drrfofxv2/image/upload/v1746200044/portfolio/noty-1746200003-1.gif
+- https://res.cloudinary.com/drrfofxv2/image/upload/v1744387023/portfolio/noty-1744387020-3.png
+- https://res.cloudinary.com/drrfofxv2/image/upload/v1744387021/portfolio/noty-1744387020-1.png
+- https://res.cloudinary.com/drrfofxv2/image/upload/v1744387022/portfolio/noty-1744387020-2.png
 repoURL: https://github.com/dagimg-dot/noty
 title: Noty
 ---
