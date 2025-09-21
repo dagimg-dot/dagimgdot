@@ -4,7 +4,7 @@ description: "This is a documented guide on how I containerized my BDU-SIMS-API.
 date: "Aug 09 2024"
 ---
 
-What the heck is Docker?? imagine you have an app that works perfectly on your local machine, but when you try to deploy it on another server, its giving you the headaches by not working as intended. This is often due to the differences that happen to exist in the underlying OS, libraries, or other software dependencies. so what do you do in this case. yes, you guessed it! **dockerize** it. 
+What the heck is Docker?? imagine you have an app that works perfectly on your local machine, but when you try to deploy it on another server, its giving you the headaches by not working as intended. This is often due to the differences that happen to exist in the underlying OS, libraries, or other software dependencies. so what do you do in this case. yes, you guessed it! **dockerize** it.
 
 Docker helps solve this problem by ensuring that the app and its dependencies are packaged together, creating a consistent and reliable environment that can be deployed across different systems.
 
@@ -14,11 +14,11 @@ Yeah...you got it. Its packaging an app, along with all its dependencies (such a
 
 Spoiler Alert! I didn't face this problem coz i didn't try to deploy the API. I am solving the problem before it arrives 😉😉.
 
-So as a fellow software engineer I started by searching "dockerizing node application" and i was lead to the official documentation which told me to run `docker init` in the root of my project. I did run that and got this. 
+So as a fellow software engineer I started by searching "dockerizing node application" and i was lead to the official documentation which told me to run `docker init` in the root of my project. I did run that and got this.
 
 ![Docker Init](https://telegra.ph/file/608f4df373bfd1ec16d6e.png)
 
-Now, 4 files are created for us but we need only 2. 
+Now, 4 files are created for us but we need only 2.
 
 - Dockerfile
 - compose.yaml (renamed to 'docker-compose.yaml')
@@ -27,7 +27,7 @@ Before continuing talking about the files let's make on thing clear **Image** vs
 
 Think of a Docker image as a blueprint or a recipe for a meal. Just like a recipe contains all the necessary ingredients and instructions to make a dish, a Docker image contains all the required files, libraries, and configuration to run an application. It's a self-contained, portable, and standardized package that encapsulates everything needed to execute the application.
 
-Now, imagine taking that recipe and actually cooking the meal. That's analogous to creating a Docker container. A container is a running instance of a Docker image, much like a prepared dish is the result of following a recipe. When you run a Docker image, it creates a container that is isolated from the host operating system and other containers. 
+Now, imagine taking that recipe and actually cooking the meal. That's analogous to creating a Docker container. A container is a running instance of a Docker image, much like a prepared dish is the result of following a recipe. When you run a Docker image, it creates a container that is isolated from the host operating system and other containers.
 
 Each container has its own file system, network, and resource allocation, ensuring that the application inside the container runs consistently regardless of the host environment. Just as the same recipe can be used to make multiple servings of a dish, a single Docker image can be used to create multiple, identical containers.
 
@@ -35,15 +35,15 @@ Each container has its own file system, network, and resource allocation, ensuri
 
 ## 1. Dockerfile
 
-so a Dockerfile is a text file that contains the instructions for building a Docker image like the recipe we talked about above 
+so a Dockerfile is a text file that contains the instructions for building a Docker image like the recipe we talked about above
 
 It specifies the base image to use, the files to copy into the image, the environment variables to set, and the commands to run when the container is started.
 
-for instance here is the Dockerfile I used 
+for instance here is the Dockerfile I used
 
 ![Dockerfile](https://telegra.ph/file/7626bb59a29c33d65f446.png)
 
-For detail explanation, you can ask AI. but umma write what i understood here so 
+For detail explanation, you can ask AI. but umma write what i understood here so
 
 **FROM** - this is pulling the base image from docker-hub (this is like github) that we are going to run later as a container.
 
@@ -73,9 +73,9 @@ restart always restarts the container after failure
 
 environment: exposes env variables from our .env file to the app running inside the container.
 
-develop(i learned this today): is very essential when you are in development. because it  lets you to sync files between the container and the host and also rebuild it when a depencency is added or deleted. it has a property called actions and you can list your actions like i did (sync, rebuild). search it up to know more
+develop(i learned this today): is very essential when you are in development. because it lets you to sync files between the container and the host and also rebuild it when a depencency is added or deleted. it has a property called actions and you can list your actions like i did (sync, rebuild). search it up to know more
 
-sooooooo, once this is done just run 
+sooooooo, once this is done just run
 
 docker compose up --build -w
 
@@ -83,9 +83,9 @@ up -> to initiate running the container
 
 --build -> to first build it
 
--w -> to watch file changes and restart the app (this is achieved with docker compose  -w flag and nodemon)
+-w -> to watch file changes and restart the app (this is achieved with docker compose -w flag and nodemon)
 
-i created a npm script for this 
+i created a npm script for this
 
 npm run dev and it will run the above command
 

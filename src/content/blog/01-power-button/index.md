@@ -40,7 +40,7 @@ Every component of our computer needs electricity to operate. So, for this purpo
 
 ### III. POST
 
-- POST stands for **Power On Self Test**. What this thing basically do is check all the components (RAM, Hard drive and other Input Output devices) in the motherboard whether they are working correctly or not. This is because it's at this point we have to know if something is not working among the components. Here if there is a failure, it will tell us using different kinds of beep sounds. And like the morse code these beep sounds have their own meaning, maybe you encounter them before. 
+- POST stands for **Power On Self Test**. What this thing basically do is check all the components (RAM, Hard drive and other Input Output devices) in the motherboard whether they are working correctly or not. This is because it's at this point we have to know if something is not working among the components. Here if there is a failure, it will tell us using different kinds of beep sounds. And like the morse code these beep sounds have their own meaning, maybe you encounter them before.
 - It achieves this checking stage by sending signals using the System Bus to the components. So, if all the components are functioning normally the next step begins. Here let’s talk about BIOS a little bit.
 - The BIOS is currently in control of everything at this point, so after the POST is over it grants the CPU to have access to all the hardware components that are connected to the motherboard. Hence, the CPU tries to access a startup code which is usually (There is a reason I said usually but that is for another article.) found in the **hard drive**. This startup code is called **The Boot Code**.
 - Now that all the hardware is operating in our motherboard, the next step will be booting up the software.
@@ -51,11 +51,11 @@ Every component of our computer needs electricity to operate. So, for this purpo
 
 So, before we talk about the **Boot Code** we have to have a base knowledge about the **MBR**. What is MBR?
 
-First **MBR** stands for **Master Boot Record**. It is a small piece of code responsible for loading the OS on your computer. It also contains information about the partitions on your hard drive and how they lay out.  
+First **MBR** stands for **Master Boot Record**. It is a small piece of code responsible for loading the OS on your computer. It also contains information about the partitions on your hard drive and how they lay out.
 
 We said BIOS is found in a ROM chip which is hardwired in the motherboard if you remember, so where is the MBR located?
 
-The MBR is located in the **first sector of your hard drive** which is **Sector 0**. (If you are wondering what sector is, I got you. Sector is the smallest physical storage unit of a hard drive, and it is fixed to store 512 bytes of data.) 
+The MBR is located in the **first sector of your hard drive** which is **Sector 0**. (If you are wondering what sector is, I got you. Sector is the smallest physical storage unit of a hard drive, and it is fixed to store 512 bytes of data.)
 
 ![Inside the Hard Disk](https://miro.medium.com/v2/resize:fit:640/format:webp/1*p8kG5E2HsR8VCQUslHbk2w.png)
 
@@ -92,4 +92,3 @@ https://youtu.be/3KcpWxbhzr8
 https://www.easeus.com/diskmanager/master-boot-record.html
 
 #OperatingSystems #SystemsProgramming #Curiosity #SoftwareEngineering
-

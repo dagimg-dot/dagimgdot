@@ -1,5 +1,5 @@
 {
-  "name": "astro-nano",
+  "name": "dagimg-dot-portfolio",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
@@ -10,27 +10,34 @@
     "preview:network": "astro preview --host",
     "astro": "astro",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "astro check"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.9",
-    "@astrojs/mdx": "^2.2.0",
-    "@astrojs/rss": "^4.0.5",
-    "@astrojs/sitemap": "^3.1.1",
-    "@astrojs/tailwind": "^5.1.0",
-    "@fontsource/inter": "^5.0.17",
-    "@fontsource/lora": "^5.0.16",
-    "@tailwindcss/typography": "^0.5.10",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
-    "astro": "^4.5.6",
-    "clsx": "^2.1.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-astro": "^0.32.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "sharp": "^0.33.3",
-    "tailwind-merge": "^2.2.2",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.3.5",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/lora": "^5.2.8",
+    "@tailwindcss/typography": "^0.5.18",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "astro": "^5.13.9",
+    "clsx": "^2.1.1",
+    "eslint": "^9.36.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "sharp": "^0.34.4",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

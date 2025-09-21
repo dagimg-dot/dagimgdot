@@ -4,7 +4,8 @@ description: "Resident ID Issuing System"
 date: "May 17 2023"
 repoURL: "https://github.com/dagimg-dot/cjx-cli-tool"
 builtWith: "Java, JavaFX and SQLite"
-images: ["https://github.com/Lit-coders/RIIS/raw/main/RIIS-ScreenShots/Overview.png"]
+images:
+  ["https://github.com/Lit-coders/RIIS/raw/main/RIIS-ScreenShots/Overview.png"]
 ---
 
 This project is a simple Resident ID Issuing System. It is a desktop application that can be used to issue resident IDs to the residents of a particular kebele. We worked on this project because of the problems that we have seen in our kebele. The problems are:
