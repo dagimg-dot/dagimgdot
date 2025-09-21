@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
@@ -35,9 +36,21 @@ const work = await Promise.all(
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      ሰላም, I'm Dagim G. Astatkie <span class="text-xl waving-hand">👋🏻</span>
-    </h4>
+    <div class="animate flex items-center justify-between">
+      <h4 class="font-semibold text-black dark:text-white">
+        ሰላም, I'm Dagim G. Astatkie <span class="text-xl waving-hand">👋🏻</span>
+      </h4>
+      <div class="profile-image-container">
+        <Image
+          src="https://res.cloudinary.com/drrfofxv2/image/upload/v1758456313/portfolio/better-hasura-history-1758456306-1.png"
+          alt="Dagim G. Astatkie"
+          class="profile-image"
+          width={80}
+          height={80}
+          loading="eager"
+        />
+      </div>
+    </div>
     <div class="space-y-16">
       <section>
         <article class="space-y-4">
@@ -163,6 +176,40 @@ const work = await Promise.all(
   .waving-hand:hover {
     animation: none;
     transform: scale(1.5) !important;
+  }
+
+  .profile-image-container {
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e5e7eb;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-image:hover {
+    transform: scale(1.1);
+    border-color: #3b82f6;
+    box-shadow:
+      0 10px 25px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  @media (max-width: 640px) {
+    .profile-image {
+      width: 60px;
+      height: 60px;
+    }
+
+    .profile-image-container {
+      margin-left: 0.5rem;
+    }
   }
 
   @keyframes wave {
