@@ -1,6 +1,6 @@
 ---
 builtWith: VueJS with Typescript
-date: Jul 28 2025
+date: Aug 06 2025
 description: A chrome extension to get a better hasura api console history experience
 images:
   - https://res.cloudinary.com/drrfofxv2/image/upload/v1758448635/portfolio/better-hasura-history-1758448633-1.png
