@@ -36,7 +36,7 @@ const work = await Promise.all(
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
     <h4 class="animate font-semibold text-black dark:text-white">
-      ሰላም, I'm Dagim G. Astatkie <span class="text-xl">👋🏻</span>
+      ሰላም, I'm Dagim G. Astatkie <span class="text-xl waving-hand">👋🏻</span>
     </h4>
     <div class="space-y-16">
       <section>
@@ -151,3 +151,49 @@ const work = await Promise.all(
     </div>
   </Container>
 </PageLayout>
+
+<style>
+  .waving-hand {
+    display: inline-block;
+    animation: wave 4s ease-in-out infinite;
+    transition: transform 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+  }
+
+  .waving-hand:hover {
+    animation: none;
+    transform: scale(1.5) !important;
+  }
+
+  @keyframes wave {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    10%,
+    30% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    40% {
+      transform: rotate(14deg);
+    }
+    50% {
+      transform: rotate(-8deg);
+    }
+    60% {
+      transform: rotate(14deg);
+    }
+    70% {
+      transform: rotate(-8deg);
+    }
+    80% {
+      transform: rotate(14deg);
+    }
+    90% {
+      transform: rotate(-8deg);
+    }
+  }
+</style>
