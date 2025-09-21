@@ -23,12 +23,20 @@ const posts = data.reduce((acc: Acc, post) => {
 }, {});
 
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
+const totalPosts = data.length;
 ---
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">Blog</div>
+      <div
+        class="animate font-semibold text-black dark:text-white flex items-center justify-between"
+      >
+        <span>Blog</span>
+        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+          {totalPosts}
+        </span>
+      </div>
       <div class="space-y-4">
         {
           years.map((year) => (
