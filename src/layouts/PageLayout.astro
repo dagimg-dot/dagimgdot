@@ -109,6 +109,30 @@ const { title, description } = Astro.props;
   let currentImageIndex = 0;
   let allImages: { src: string; alt: string }[] = [];
 
+  // Touch/swipe variables
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  const minSwipeDistance = 50; // Minimum distance for a swipe
+
+  function isMobileDevice() {
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) ||
+      (window.innerWidth <= 768 && "ontouchstart" in window)
+    );
+  }
+
+  function getNavigationHint() {
+    if (isMobileDevice()) {
+      return "Swipe left and right to navigate";
+    } else {
+      return "Use ← → arrow keys to navigate";
+    }
+  }
+
   function openFullscreen(src: string, alt: string) {
     // Find the current image index
     currentImageIndex = allImages.findIndex((img) => img.src === src);
@@ -121,7 +145,7 @@ const { title, description } = Astro.props;
             allImages.length > 1
               ? `
             <div class="navigation-hint">
-              Use ← → arrow keys to navigate
+              ${getNavigationHint()}
             </div>
           `
               : ""
@@ -189,6 +213,10 @@ const { title, description } = Astro.props;
     // Add event listeners
     document.addEventListener("click", handleClick);
     document.addEventListener("keydown", handleKeydown);
+    document.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    document.addEventListener("touchend", handleTouchEnd, { passive: true });
   }
 
   // Clean up event listeners before reinitializing on page transition
@@ -196,6 +224,8 @@ const { title, description } = Astro.props;
     // Remove the specific event handlers
     document.removeEventListener("click", handleClick);
     document.removeEventListener("keydown", handleKeydown);
+    document.removeEventListener("touchstart", handleTouchStart);
+    document.removeEventListener("touchend", handleTouchEnd);
     if (fullscreenContainer) {
       fullscreenContainer.innerHTML = "";
       fullscreenContainer.classList.remove("active");
@@ -228,6 +258,40 @@ const { title, description } = Astro.props;
         navigateToImage("prev");
       } else if (event.key === "ArrowRight") {
         event.preventDefault();
+        navigateToImage("next");
+      }
+    }
+  }
+
+  function handleTouchStart(event: TouchEvent) {
+    if (fullscreenContainer?.classList.contains("active")) {
+      touchStartX = event.touches[0].clientX;
+      touchStartY = event.touches[0].clientY;
+    }
+  }
+
+  function handleTouchEnd(event: TouchEvent) {
+    if (fullscreenContainer?.classList.contains("active")) {
+      touchEndX = event.changedTouches[0].clientX;
+      touchEndY = event.changedTouches[0].clientY;
+      handleSwipe();
+    }
+  }
+
+  function handleSwipe() {
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+
+    // Check if it's a horizontal swipe (more horizontal than vertical movement)
+    if (
+      Math.abs(deltaX) > Math.abs(deltaY) &&
+      Math.abs(deltaX) > minSwipeDistance
+    ) {
+      if (deltaX > 0) {
+        // Swipe right - go to previous image
+        navigateToImage("prev");
+      } else {
+        // Swipe left - go to next image
         navigateToImage("next");
       }
     }
