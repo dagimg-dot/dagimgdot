@@ -76,84 +76,160 @@ const { title, description } = Astro.props;
   .hidden {
     display: none;
   }
+
+  .navigation-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0;
+    animation: fadeInHint 0.5s ease-in-out 1s forwards;
+  }
+
+  @keyframes fadeInHint {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
 </style>
 
 <script>
   let fullscreenContainer: HTMLDivElement | null = null;
+  let currentImageIndex = 0;
+  let allImages: { src: string; alt: string }[] = [];
+
+  function openFullscreen(src: string, alt: string) {
+    // Find the current image index
+    currentImageIndex = allImages.findIndex((img) => img.src === src);
+
+    if (fullscreenContainer) {
+      fullscreenContainer.innerHTML = `
+        <div class="fullscreen-overlay">
+          <img src="${src}" alt="${alt}" class="fullscreen-image">
+          ${
+            allImages.length > 1
+              ? `
+            <div class="navigation-hint">
+              Use ← → arrow keys to navigate
+            </div>
+          `
+              : ""
+          }
+        </div>
+      `;
+      fullscreenContainer.classList.add("active");
+      setTimeout(() => {
+        const fullscreenImage =
+          fullscreenContainer?.querySelector(".fullscreen-image");
+        fullscreenImage?.classList.add("active");
+      }, 50);
+    }
+  }
+
+  function navigateToImage(direction: "prev" | "next") {
+    if (allImages.length <= 1) {
+      return;
+    }
+
+    if (direction === "prev") {
+      currentImageIndex =
+        currentImageIndex > 0 ? currentImageIndex - 1 : allImages.length - 1;
+    } else {
+      currentImageIndex =
+        currentImageIndex < allImages.length - 1 ? currentImageIndex + 1 : 0;
+    }
+
+    const currentImage = allImages[currentImageIndex];
+
+    if (fullscreenContainer) {
+      const fullscreenImage =
+        fullscreenContainer.querySelector(".fullscreen-image");
+      if (fullscreenImage) {
+        fullscreenImage.setAttribute("src", currentImage.src);
+        fullscreenImage.setAttribute("alt", currentImage.alt);
+      }
+    }
+  }
+
+  function closeFullscreen() {
+    if (fullscreenContainer) {
+      const fullscreenImage =
+        fullscreenContainer.querySelector(".fullscreen-image");
+      fullscreenImage?.classList.remove("active");
+      fullscreenContainer.classList.remove("active");
+      setTimeout(() => {
+        fullscreenContainer!.innerHTML = "";
+      }, 300);
+    }
+  }
 
   function setupImagePreviews() {
-    console.log("Setting up image previews");
-
     fullscreenContainer = document.getElementById(
       "fullscreen-container"
     ) as HTMLDivElement;
 
-    function openFullscreen(src: string, alt: string) {
-      console.log("Opening fullscreen", src, alt);
-      if (fullscreenContainer) {
-        fullscreenContainer.innerHTML = `
-          <div class="fullscreen-overlay">
-            <img src="${src}" alt="${alt}" class="fullscreen-image">
-          </div>
-        `;
-        fullscreenContainer.classList.add("active");
-        setTimeout(() => {
-          const fullscreenImage =
-            fullscreenContainer?.querySelector(".fullscreen-image");
-          fullscreenImage?.classList.add("active");
-        }, 50);
-      }
-    }
+    // Collect all images on the page
+    const imageElements = document.querySelectorAll(".preview-image");
+    allImages = Array.from(imageElements).map((img) => ({
+      src: img.getAttribute("src") || "",
+      alt: img.getAttribute("alt") || "",
+    }));
 
-    function closeFullscreen() {
-      console.log("Closing fullscreen");
-      if (fullscreenContainer) {
-        const fullscreenImage =
-          fullscreenContainer.querySelector(".fullscreen-image");
-        fullscreenImage?.classList.remove("active");
-        fullscreenContainer.classList.remove("active");
-        setTimeout(() => {
-          fullscreenContainer!.innerHTML = "";
-        }, 300);
-      }
-    }
-
-    // Click events to open or close fullscreen
-    document.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (target.classList.contains("preview-image")) {
-        openFullscreen(
-          target.getAttribute("src") || "",
-          target.getAttribute("alt") || ""
-        );
-      } else if (
-        fullscreenContainer &&
-        (target === fullscreenContainer ||
-          target.classList.contains("fullscreen-overlay"))
-      ) {
-        closeFullscreen();
-      }
-    });
-
-    // Escape key to close fullscreen
-    document.addEventListener("keydown", (event) => {
-      if (
-        event.key === "Escape" &&
-        fullscreenContainer?.classList.contains("active")
-      ) {
-        closeFullscreen();
-      }
-    });
+    // Add event listeners
+    document.addEventListener("click", handleClick);
+    document.addEventListener("keydown", handleKeydown);
   }
 
   // Clean up event listeners before reinitializing on page transition
   function cleanUp() {
-    console.log("Cleaning up event listeners");
-    document.removeEventListener("click", setupImagePreviews);
-    document.removeEventListener("keydown", setupImagePreviews);
+    // Remove the specific event handlers
+    document.removeEventListener("click", handleClick);
+    document.removeEventListener("keydown", handleKeydown);
     if (fullscreenContainer) {
       fullscreenContainer.innerHTML = "";
       fullscreenContainer.classList.remove("active");
+    }
+  }
+
+  // Define event handlers outside of setupImagePreviews
+  function handleClick(event: Event) {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains("preview-image")) {
+      openFullscreen(
+        target.getAttribute("src") || "",
+        target.getAttribute("alt") || ""
+      );
+    } else if (
+      fullscreenContainer &&
+      (target === fullscreenContainer ||
+        target.classList.contains("fullscreen-overlay"))
+    ) {
+      closeFullscreen();
+    }
+  }
+
+  function handleKeydown(event: KeyboardEvent) {
+    if (fullscreenContainer?.classList.contains("active")) {
+      if (event.key === "Escape") {
+        closeFullscreen();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        navigateToImage("prev");
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        navigateToImage("next");
+      }
     }
   }
 

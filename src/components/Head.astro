@@ -66,7 +66,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
   document.addEventListener("astro:before-swap", (e) =>
     [
       ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        'link[as="font"]'
+        "link[as=\"font\"]"
       ),
     ].forEach((link) => link.remove())
   );
@@ -163,7 +163,8 @@ const { title, description, image = "/nano.png" } = Astro.props;
       document.documentElement.classList.remove("dark");
     }
 
-    window.getComputedStyle(css).opacity;
+    // Force style computation to ensure dark mode is applied
+    void window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
   }
 
