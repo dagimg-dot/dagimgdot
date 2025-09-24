@@ -1,3 +1,29 @@
+---
+export interface Props {
+  initialGreeting?: string;
+  initialLanguage?: string;
+  countryCode?: string;
+  detectedLanguages?: string[];
+}
+
+const {
+  initialGreeting = "ሰላም",
+  initialLanguage = "am",
+  countryCode = "ET",
+  detectedLanguages = ["am-ET"],
+} = Astro.props;
+---
+
+<span
+  class="greeting-text"
+  data-initial-greeting={initialGreeting}
+  data-initial-language={initialLanguage}
+  data-country-code={countryCode}
+  data-detected-languages={JSON.stringify(detectedLanguages)}
+>
+  {initialGreeting}
+</span>
+
 <script>
   class TextScramble {
     element: HTMLElement;
@@ -87,42 +113,100 @@
     }
   }
 
+  // Import client-side translation utility
+  async function translateText(
+    text: string,
+    targetLang: string,
+    sourceLang: string = "en"
+  ): Promise<string> {
+    try {
+      const { translateText: clientTranslate } = await import(
+        "../utils/clientTranslation.ts"
+      );
+      return await clientTranslate(text, targetLang, sourceLang);
+    } catch (error) {
+      console.error("Client translation error:", error);
+      return text;
+    }
+  }
+
+  function getNextLanguage(
+    currentLang: string,
+    availableLangs: string[]
+  ): string {
+    // Ensure we have languages to cycle through
+    if (!availableLangs || availableLangs.length === 0) {
+      return "en";
+    }
+
+    // Get base language codes (remove country codes like 'en-US' -> 'en')
+    const baseLangs = availableLangs.map((lang) => lang.split("-")[0]);
+
+    // Find current language index
+    const currentIndex = baseLangs.indexOf(currentLang);
+
+    // If current language not found, start from the beginning
+    const startIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (startIndex + 1) % baseLangs.length;
+
+    return baseLangs[nextIndex];
+  }
+
   // Wait for page to load
-  document.addEventListener("DOMContentLoaded", () => {
-    // Handle greeting text scramble effect
+  document.addEventListener("DOMContentLoaded", async () => {
     const greetingElement = document.querySelector(
       ".greeting-text"
     ) as HTMLElement;
 
     if (greetingElement) {
       const fx = new TextScramble(greetingElement);
-      const englishText = greetingElement.getAttribute("data-english");
-      const amharicText = greetingElement.getAttribute("data-amharic");
-      let isAmharic = true; // Start with Amharic
+      const initialLanguage = greetingElement.getAttribute(
+        "data-initial-language"
+      );
+      const detectedLanguages = JSON.parse(
+        greetingElement.getAttribute("data-detected-languages") || "[]"
+      );
+
+      let currentLanguage = initialLanguage;
       let isAnimating = false;
 
       // Toggle between languages on hover
-      greetingElement.addEventListener("mouseenter", () => {
-        if (!isAnimating && englishText && amharicText) {
+      greetingElement.addEventListener("mouseenter", async () => {
+        if (!isAnimating && detectedLanguages && detectedLanguages.length > 1) {
           isAnimating = true;
-          if (isAmharic) {
-            fx.setText(englishText!).then(() => {
-              isAmharic = false;
+
+          try {
+            // Get the next language to switch to
+            const nextLanguage = getNextLanguage(
+              currentLanguage || "en",
+              detectedLanguages
+            );
+
+            console.log(`Cycling from ${currentLanguage} to ${nextLanguage}`);
+
+            const nextGreeting = await translateText(
+              "Hello",
+              nextLanguage,
+              "en"
+            );
+
+            console.log(`Translated greeting: ${nextGreeting}`);
+
+            fx.setText(nextGreeting).then(() => {
+              currentLanguage = nextLanguage;
               isAnimating = false;
             });
-          } else {
-            fx.setText(amharicText!).then(() => {
-              isAmharic = true;
-              isAnimating = false;
-            });
+          } catch (error) {
+            console.error("Translation failed:", error);
+            isAnimating = false;
           }
+        } else if (detectedLanguages && detectedLanguages.length <= 1) {
+          console.log("Only one language available, no cycling needed");
         }
       });
     }
   });
 </script>
-
-<span class="greeting-text" data-english="Hello" data-amharic="ሰላም">ሰላም</span>
 
 <style>
   .greeting-text {
