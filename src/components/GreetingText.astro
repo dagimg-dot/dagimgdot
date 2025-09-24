@@ -38,6 +38,8 @@ const {
     frame: number;
     frameRequest: number;
     resolve: (() => void) | null;
+    isContinuous: boolean;
+    continuousInterval: ReturnType<typeof setTimeout> | null;
 
     constructor(element: HTMLElement) {
       this.element = element;
@@ -47,6 +49,8 @@ const {
       this.frame = 0;
       this.frameRequest = 0;
       this.resolve = null;
+      this.isContinuous = false;
+      this.continuousInterval = null;
       this.update = this.update.bind(this);
     }
 
@@ -71,6 +75,39 @@ const {
       this.frame = 0;
       this.update();
       return promise;
+    }
+
+    startContinuousScrambling(): void {
+      this.isContinuous = true;
+      this.element.classList.add("scrambling");
+      
+      const scramble = () => {
+        if (!this.isContinuous) return;
+        
+        const currentText = this.element.innerText;
+        let scrambledText = "";
+        
+        for (let i = 0; i < currentText.length; i++) {
+          if (Math.random() < 0.3) {
+            scrambledText += this.randomChar();
+          } else {
+            scrambledText += currentText[i];
+          }
+        }
+        
+        this.element.innerText = scrambledText;
+        this.continuousInterval = setTimeout(scramble, 50);
+      };
+      
+      scramble();
+    }
+
+    stopContinuousScrambling(): void {
+      this.isContinuous = false;
+      if (this.continuousInterval) {
+        clearTimeout(this.continuousInterval);
+        this.continuousInterval = null;
+      }
     }
 
     update(): void {
@@ -184,6 +221,10 @@ const {
 
             console.log(`Cycling from ${currentLanguage} to ${nextLanguage}`);
 
+            // Start continuous scrambling animation immediately
+            fx.startContinuousScrambling();
+
+            // Translate in the background
             const nextGreeting = await translateText(
               "Hello",
               nextLanguage,
@@ -192,13 +233,19 @@ const {
 
             console.log(`Translated greeting: ${nextGreeting}`);
 
+            // Stop continuous scrambling and transition to translated text
+            fx.stopContinuousScrambling();
             fx.setText(nextGreeting).then(() => {
               currentLanguage = nextLanguage;
               isAnimating = false;
             });
           } catch (error) {
             console.error("Translation failed:", error);
-            isAnimating = false;
+            // If translation fails, stop scrambling and show original text
+            fx.stopContinuousScrambling();
+            fx.setText("Hello").then(() => {
+              isAnimating = false;
+            });
           }
         } else if (detectedLanguages && detectedLanguages.length <= 1) {
           console.log("Only one language available, no cycling needed");
