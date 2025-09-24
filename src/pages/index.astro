@@ -39,6 +39,7 @@ const work = await Promise.all(
 let languageDetection;
 try {
   languageDetection = await getBestLanguageForUser();
+  console.log("Server-side language detection result:", languageDetection);
 } catch (error) {
   console.error("Language detection failed:", error);
   // Fallback to default values
