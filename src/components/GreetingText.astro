@@ -1,0 +1,152 @@
+<script>
+  class TextScramble {
+    element: HTMLElement;
+    chars: string;
+    queue: Array<{
+      from: string;
+      to: string;
+      start: number;
+      end: number;
+      char?: string;
+    }>;
+    frame: number;
+    frameRequest: number;
+    resolve: (() => void) | null;
+
+    constructor(element: HTMLElement) {
+      this.element = element;
+      this.chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩሀሁሂሃሄህሆለሉሊላሌልሎሏሐሑሒሓሔሕሖሗመሙሚማሜምሞሟሠሡሢሣሤሥሦሧረሩሪራሬርሮሯሰሱሲሳሴስሶሷሸሹሺሻሼሽሾሿቀቁቂቃቄቅቆቇቈቊቋቌቍቐቑቒቓቔቕቖቘቚቛቜቝበቡቢባቤብቦቧቨቩቪቫቬቭቮቯተቱቲታቴትቶቷቸቹቺቻቼችቾቿኀኁኂኃኄኅኆኇኈኊኋኌኍነኑኒናኔንኖኗኘኙኚኛኜኝኞኟአኡኢኣኤእኦኧከኩኪካኬክኮኯኰ኱ኲኳኴኵኸኹኺኻኼኽኾዀ዁ዂዃዄዅወዉዊዋዌውዎዏዐዑዒዓዔዕዖዘዙዚዛዜዝዞዟዠዡዢዣዤዥዦዧየዩዪያዬይዮዯደዱዲዳዴድዶዷዸዹዺዻዼዽዾዿጀጁጂጃጄጅጆጇገጉጊጋጌግጎጏጐ጑ጒጓጔጕጘጙጚጛጜጝጞጟጠጡጢጣጤጥጦጧጨጩጪጫጬጭጮጯጰጱጲጳጴጵጶጷጸጹጺጻጼጽጾጿፀፁፂፃፄፅፆፇፈፉፊፋፌፍፎፏፐፑፒፓፔፕፖፗፘፙፚ፟፠፡።፣፤፥፦፧፨፩፪፫፬፭፮፯፰፱፲፳፴፵፶፷፸፹፺፻፼";
+      this.queue = [];
+      this.frame = 0;
+      this.frameRequest = 0;
+      this.resolve = null;
+      this.update = this.update.bind(this);
+    }
+
+    setText(newText: string): Promise<void> {
+      const oldText = this.element.innerText;
+      const length = Math.max(oldText.length, newText.length);
+      const promise = new Promise<void>((resolve) => (this.resolve = resolve));
+      this.queue = [];
+
+      // Add scrambling class for blur effect
+      this.element.classList.add("scrambling");
+
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || "";
+        const to = newText[i] || "";
+        const start = Math.floor(Math.random() * 8);
+        const end = start + Math.floor(Math.random() * 12) + 15;
+        this.queue.push({ from, to, start, end });
+      }
+
+      cancelAnimationFrame(this.frameRequest);
+      this.frame = 0;
+      this.update();
+      return promise;
+    }
+
+    update(): void {
+      let output = "";
+      let complete = 0;
+
+      for (let i = 0, n = this.queue.length; i < n; i++) {
+        let { from, to, start, end, char } = this.queue[i];
+
+        if (this.frame >= end) {
+          complete++;
+          output += to;
+        } else if (this.frame >= start) {
+          if (!char || Math.random() < 0.4) {
+            char = this.randomChar();
+            this.queue[i].char = char;
+          }
+          output += char;
+        } else {
+          output += from;
+        }
+      }
+
+      this.element.innerText = output;
+
+      if (complete === this.queue.length) {
+        // Remove scrambling class when animation is complete
+        this.element.classList.remove("scrambling");
+        if (this.resolve) {
+          this.resolve();
+        }
+      } else {
+        this.frameRequest = requestAnimationFrame(this.update);
+        this.frame++;
+      }
+    }
+
+    randomChar(): string {
+      return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+  }
+
+  // Wait for page to load
+  document.addEventListener("DOMContentLoaded", () => {
+    // Handle greeting text scramble effect
+    const greetingElement = document.querySelector(
+      ".greeting-text"
+    ) as HTMLElement;
+
+    if (greetingElement) {
+      const fx = new TextScramble(greetingElement);
+      const englishText = greetingElement.getAttribute("data-english");
+      const amharicText = greetingElement.getAttribute("data-amharic");
+      let isAmharic = true; // Start with Amharic
+      let isAnimating = false;
+
+      // Toggle between languages on hover
+      greetingElement.addEventListener("mouseenter", () => {
+        if (!isAnimating && englishText && amharicText) {
+          isAnimating = true;
+          if (isAmharic) {
+            fx.setText(englishText!).then(() => {
+              isAmharic = false;
+              isAnimating = false;
+            });
+          } else {
+            fx.setText(amharicText!).then(() => {
+              isAmharic = true;
+              isAnimating = false;
+            });
+          }
+        }
+      });
+    }
+  });
+</script>
+
+<span class="greeting-text" data-english="Hello" data-amharic="ሰላም">ሰላም</span>
+
+<style>
+  .greeting-text {
+    cursor: pointer;
+    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: inline-block;
+  }
+
+  .greeting-text:hover {
+    color: #3b82f6;
+    transform: scale(1.05);
+  }
+
+  .greeting-text.scrambling {
+    filter: blur(1.5px);
+    animation: scramble-blur 0.06s infinite alternate;
+  }
+
+  @keyframes scramble-blur {
+    0% {
+      filter: blur(1.2px);
+    }
+    100% {
+      filter: blur(2px);
+    }
+  }
+</style>
