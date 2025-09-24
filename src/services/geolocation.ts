@@ -24,7 +24,6 @@ export async function getUserCountry(
   ip?: string
 ): Promise<UserLocation | null> {
   try {
-    ip = "77.184.79.28";
     const apiKey = import.meta.env.IP_GEOLOCATION_API_KEY;
 
     if (!apiKey) {

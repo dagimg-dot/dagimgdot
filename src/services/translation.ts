@@ -52,10 +52,12 @@ export async function translateText(
         translatedText.includes("LANGPAIR=") ||
         translatedText === text) {
       console.warn(`Invalid translation result: ${translatedText}`);
+      // Cache the fallback result to avoid repeated API calls for invalid languages
+      translationCache.set(cacheKey, text);
       return text;
     }
 
-    // Cache the result
+    // Cache the valid result
     translationCache.set(cacheKey, translatedText);
 
     return translatedText;
@@ -108,10 +110,12 @@ export async function translateWithMyMemory(
         translatedText.includes("INVALID TARGET LANGUAGE") ||
         translatedText.includes("LANGPAIR=")) {
       console.warn(`MyMemory returned error message: ${translatedText}`);
+      // Cache the fallback result to avoid repeated API calls for invalid languages
+      translationCache.set(cacheKey, text);
       return text;
     }
 
-    // Cache the result
+    // Cache the valid result
     translationCache.set(cacheKey, translatedText);
 
     return translatedText;
@@ -131,11 +135,27 @@ export async function getGreetingWithFallback(
 ): Promise<string> {
   try {
     const translated = await translateText("Hello", targetLanguage, "en");
-    console.log("API translation successful", translated);
+    console.log(`API translation for ${targetLanguage}:`, translated);
+    
+    // Check if translation actually worked (not just returned "Hello")
+    if (translated === "Hello") {
+      console.warn(`Translation returned original text for ${targetLanguage}, using hardcoded fallback`);
+      // Use hardcoded fallback only when API fails
+      const hardcodedGreetings: Record<string, string> = {
+        am: "ሰላም", // Amharic
+      };
+      return hardcodedGreetings[targetLanguage] || "Hello";
+    }
+    
     return translated;
   } catch (error) {
     console.error("API translation failed:", error);
-    return "Hello";
+    // Use hardcoded fallback only when API fails
+    const hardcodedGreetings: Record<string, string> = {
+      am: "ሰላም", // Amharic
+      amh: "ሰላም", // Amharic alternative
+    };
+    return hardcodedGreetings[targetLanguage] || "Hello";
   }
 }
 

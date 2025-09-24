@@ -57,10 +57,12 @@ export async function translateText(
         translatedText.includes("LANGPAIR=") ||
         translatedText === text) {
       console.warn(`Invalid translation result: ${translatedText}`);
+      // Cache the fallback result to avoid repeated API calls for invalid languages
+      clientTranslationCache.set(cacheKey, text);
       return text;
     }
 
-    // Cache the result
+    // Cache the valid result
     clientTranslationCache.set(cacheKey, translatedText);
 
     return translatedText;
