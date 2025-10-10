@@ -10,16 +10,31 @@ interface Props {
 }
 
 const { src, alt, class: className, ...props } = Astro.props;
+
+// For remote images, don't infer size to avoid fetch failures
+const isRemoteImage = typeof src === "string" && src.startsWith("http");
 ---
 
 <div class="image-preview-container">
-  <!-- @ts-expect-error -->
-  <Image
-    src={src}
-    alt={alt}
-    class={`preview-image cursor-pointer ${className || ""}`}
-    loading="eager"
-    {...props}
-    inferSize={true}
-  />
+  {
+    isRemoteImage ? (
+      <img
+        src={src as string}
+        alt={alt}
+        class={`preview-image cursor-pointer ${className || ""}`}
+        loading="eager"
+        {...props}
+      />
+    ) : (
+      // @ts-expect-error
+      <Image
+        src={src}
+        alt={alt}
+        class={`preview-image cursor-pointer ${className || ""}`}
+        loading="eager"
+        {...props}
+        inferSize={true}
+      />
+    )
+  }
 </div>

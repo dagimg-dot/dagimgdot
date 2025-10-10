@@ -7,6 +7,7 @@ import { readingTime } from "@lib/utils";
 import BackToPrev from "@components/BackToPrev.astro";
 import Link from "@components/Link.astro";
 import ImagePreview from "@components/ImagePreview.astro";
+import GitHubStars from "@components/GitHubStars.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
@@ -51,9 +52,15 @@ const { Content } = await project.render();
             )}
             {project.data.demoURL && project.data.repoURL && <span>/</span>}
             {project.data.repoURL && (
-              <Link href={project.data.repoURL} external>
-                repo
-              </Link>
+              <div class="flex items-center gap-2">
+                <Link href={project.data.repoURL} external>
+                  repo
+                </Link>
+                <GitHubStars
+                  repoURL={project.data.repoURL}
+                  starCount={project.data.starCount}
+                />
+              </div>
             )}
           </nav>
         )
