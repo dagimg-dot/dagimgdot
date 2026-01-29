@@ -68,12 +68,15 @@ const { Content } = await project.render();
       <div>Built with {project.data.builtWith}</div>
       {
         project.data.images && project.data.images.length > 0 && (
-          <div class="image-grid animate mt-6">
+          <div
+            class="image-grid animate mt-6"
+            style={`--grid-cols: ${project.data.images.length === 1 ? "1fr" : "1fr 1fr"}`}
+          >
             {project.data.images.map((image) => (
               <ImagePreview
                 src={image}
                 alt={project.data.title}
-                class="w-full h-auto object-cover aspect-video"
+                class="w-full h-auto object-cover"
               />
             ))}
           </div>
@@ -92,7 +95,7 @@ const { Content } = await project.render();
 <style>
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: var(--grid-cols, 1fr 1fr);
     align-items: center;
     gap: 1rem;
   }

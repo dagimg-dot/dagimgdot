@@ -11,7 +11,7 @@ export default defineConfig({
       image: false,
     }),
     sitemap(),
-    tailwind()
+    tailwind(),
   ],
   vite: {
     build: {
