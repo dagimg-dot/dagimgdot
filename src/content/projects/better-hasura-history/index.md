@@ -27,11 +27,11 @@ The default history pane in Hasura has some frustrating limitations, so I fixed 
 
 ### Key Features
 
-🔍 **Better history view** for the GraphiQL section  
-♾️ **Unlimited history view** - no more 20 operation limit  
-👁️ **Show full operation with variables on hover** for each history item (ctrl + hover)  
-🔎 **Search through your history easily** with fuzzy search  
-✏️ **Edit the name** of the history item  
-🗑️ **Delete history item** with confirmation  
-⚙️ **Enable/Disable the extension** from the popup  
-🧹 **Remove original History button** from the GraphiQL section
+- 🔍 **Better history view** for the GraphiQL section  
+- ♾️ **Unlimited history view** - no more 20 operation limit  
+- 👁️ **Show full operation with variables on hover** for each history item (ctrl + hover)  
+- 🔎 **Search through your history easily** with fuzzy search  
+- ✏️ **Edit the name** of the history item  
+- 🗑️ **Delete history item** with confirmation  
+- ⚙️ **Enable/Disable the extension** from the popup  
+- 🧹 **Remove original History button** from the GraphiQL section
