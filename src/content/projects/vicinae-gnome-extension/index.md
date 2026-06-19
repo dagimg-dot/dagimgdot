@@ -18,11 +18,10 @@ There is a new launcher in town for Linux with raycast store compatibility and i
 
 The Vicinae launcher needed proper GNOME integration to work seamlessly on the desktop environment. I built this GNOME extension to expose clipboard and window management APIs to the C++ backend, making Vicinae fully functional on GNOME.
 
-The extension is now at 2200+ downloads on GNOME Extension Store and has become an essential component for Vicinae users on GNOME!
+The extension is now at 11k+ downloads on GNOME Extension Store and has become an essential component for Vicinae users on GNOME!
 
 ### Key Features
 
 - Clipboard events and Window management APIs through DBus
 - Protect sensitive apps (like password managers) by blocking clipboard access
 - Launcher window that mimics layer-shell protocol which auto-centers, stays on top, and gracefully closes when you click away
-- Paste directly to focused window from vicinae clipboard history view

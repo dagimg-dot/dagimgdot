@@ -1,37 +1,49 @@
 ---
 builtWith: VueJS with Typescript
 date: Aug 06 2025
-description: A chrome extension to get a better hasura api console history experience
+description: A chrome extension that enhances the Hasura Console with session-based auth, an improved history panel, and cross-table search
 images:
   - https://res.cloudinary.com/drrfofxv2/image/upload/v1758448635/portfolio/better-hasura-history-1758448633-1.png
   - https://res.cloudinary.com/drrfofxv2/image/upload/v1758448910/portfolio/better-hasura-history-1758448906-1.png
 repoURL: https://github.com/dagimg-dot/better-hasura-history
-title: Better Hasura History
+title: Better Hasura Console
 ---
 
-Better Hasura History is a Chrome extension that enhances the Hasura GraphiQL console experience by fixing the frustrating limitations of the default history pane.
+Better Hasura Console is a Chrome extension that enhances the Hasura Console with session-based auth, an improved history panel, and cross-table search.
 
-### Why Better Hasura History?
+### Why Better Hasura Console?
 
 This is the second Chrome extension I've built. It's super niche—but if you use Hasura a lot, especially for testing queries and mutations in the embedded GraphiQL console, this will be a relief.
 
-The default history pane in Hasura has some frustrating limitations, so I fixed them:
+The default Hasura Console has some frustrating limitations, so I built this extension to fix them:
 
-**Limited history**: Only the last 20 operations were saved. I made it unlimited and persist in localStorage.
+**Session Management:**
 
-**No search**: Navigating history was a pain. I added a fuzzy search bar so you can quickly find what you need.
+- Manage multiple authentication sessions — each with its own GraphQL mutation and variables
+- JWT-based authentication: runs your mutation, extracts the token, sets it as `Authorization: Bearer` in the request headers
+- Switch between sessions without re-authenticating — one-click active/inactive toggle, no server round-trip
+- Decodes the JWT and extracts a role name from the payload
+- Auth status bar shows the active Bearer token and decoded role in real time
+- Sessions persist in localStorage across page reloads
 
-**No preview**: You had to load an operation into the editor just to see what it was. Now, just hold ctrl / cmd and hover—it'll show the full operation and any used variables in a popup as you hover over it.
+**History Panel:**
 
-**Duplicate Nightmare**: The default history manager duplicates history if you run it more than one time. So, now I string match the operation and variables and only add it to the history if it's different.
+- Persistent operation history with unlimited storage
+- Fuzzy search through past queries and mutations
+- Edit operation names for easy identification
+- Delete individual entries or clear all history
+- View full operation text and variables on hover (Ctrl + hover)
+- Works in both GraphiQL and Raw SQL pages
 
-### Key Features
+**Cross-Table Search:**
 
-- 🔍 **Better history view** for the GraphiQL section  
-- ♾️ **Unlimited history view** - no more 20 operation limit  
-- 👁️ **Show full operation with variables on hover** for each history item (ctrl + hover)  
-- 🔎 **Search through your history easily** with fuzzy search  
-- ✏️ **Edit the name** of the history item  
-- 🗑️ **Delete history item** with confirmation  
-- ⚙️ **Enable/Disable the extension** from the popup  
-- 🧹 **Remove original History button** from the GraphiQL section
+- Search for a value across all tables in your database schema
+- Regex-based column discovery to target specific fields
+- Progressive streaming results — data appears as each batch of tables resolves
+- Column discovery caching for repeat searches
+- Background pre-fetch of matching columns while you type
+
+**Table Search:**
+
+- Quick-filter tables in the Data Manager sidebar
+- Instant filtering as you type

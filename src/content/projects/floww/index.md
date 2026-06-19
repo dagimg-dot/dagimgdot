@@ -17,6 +17,13 @@ Have you ever get tired of setting up your workspaces, the apps opened in each o
 
 I have been there and I was looking for a simple solution to automate this. But couldn't find any simple solution other than writing a bash script, however I decided to go the other way and build a full fledged CLI app that let's me reproduce my workspace setup across reboots and across different machines.
 
+**Supported Desktop Environments:**
+
+- **Hyprland** (Wayland) — native support via `hyprctl`
+- **Niri** (Wayland) — native support via `niri msg`
+- **GNOME** — via EWMH/wmctrl
+- **Other stacked WMs** — via EWMH/wmctrl
+
 **Key Features:**
 
 - **Workflow Definitions:** Define workflows in YAML, JSON, or TOML files.
