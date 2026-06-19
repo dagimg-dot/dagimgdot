@@ -3,8 +3,8 @@ builtWith: Kotlin
 date: Jan 06 2026
 description: A lightweight edge panel mobile app focused on clipboard access
 images:
-- https://res.cloudinary.com/drrfofxv2/image/upload/v1769762394/portfolio/glide-1769762391-1.png
-- https://res.cloudinary.com/drrfofxv2/image/upload/v1769762396/portfolio/glide-1769762391-2.png
+  - https://res.cloudinary.com/drrfofxv2/image/upload/v1769762394/portfolio/glide-1769762391-1.png
+  - https://res.cloudinary.com/drrfofxv2/image/upload/v1769762396/portfolio/glide-1769762391-2.png
 repoURL: https://github.com/dagimg-dot/glide
 title: Glide
 ---
