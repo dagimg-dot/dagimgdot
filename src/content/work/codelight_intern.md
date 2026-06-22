@@ -15,4 +15,4 @@ CodeLight Software Engineering is a rapidly expanding provider of innovative sof
 - Developed a **TypeScript automation script** for database-to-database migration, reducing manual data entry errors
 - Integrated NFC hardware tags for real-time cattle identification and tracking
 
-**Outcome:** After 3 months, I was promoted to a full-time remote Full Stack Engineer position due to consistent delivery and technical growth.
+**Outcome:** Promoted to a full-time remote Full Stack Engineer position due to consistent delivery and technical growth.
