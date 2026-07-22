@@ -2,6 +2,7 @@
 company: "Vistec Technologies PLC"
 companyWebsite: "https://www.linkedin.com/company/vistec-technology/?originalSubdomain=et"
 role: "Backend Engineer"
+description: "Built delivery platform and supply chain tracking systems using Express, PostgreSQL, and Hasura."
 dateStart: "Jul 2025"
 dateEnd: "Feb 2026"
 ---

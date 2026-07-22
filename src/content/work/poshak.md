@@ -2,6 +2,7 @@
 company: "Poshak Consultancy Services PLC"
 companyWebsite: "https://www.linkedin.com/in/poshak-consultancy/"
 role: "Mobile Application Developer Intern"
+description: "Fixed bugs and improved UX in a mobile ERP app for garment factory management."
 dateStart: "Oct 2022"
 dateEnd: "Jan 2023"
 ---

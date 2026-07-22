@@ -2,6 +2,7 @@
 company: "Klik Investment PLC"
 companyWebsite: "https://klik.et"
 role: "Backend Engineer"
+description: "Building and maintaining the backend infrastructure for a multi-platform delivery service serving Addis Ababa."
 dateStart: "Feb 2026"
 dateEnd: "Present"
 ---

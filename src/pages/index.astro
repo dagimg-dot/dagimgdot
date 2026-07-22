@@ -1,13 +1,13 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { dateRange } from "@lib/utils";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import OssCard from "@components/OssCard.astro";
 import Link from "@components/Link.astro";
 import { SITE, HOME, SOCIALS, OSS } from "@consts";
-import WorkSnippet from "@components/WorkSnippet.astro";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -32,12 +32,7 @@ const allwork = (await getCollection("work"))
   )
   .slice(0, SITE.NUM_WORKS_ON_HOMEPAGE);
 
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await render(item);
-    return { ...item, Content };
-  })
-);
+const work = allwork;
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -111,8 +106,39 @@ const work = await Promise.all(
           </h5>
           <Link href="/work"> See all work </Link>
         </div>
-        <ul class="flex flex-col space-y-4">
-          {work.map((entry) => <WorkSnippet entry={entry} />)}
+        <ul class="flex flex-col gap-3">
+          {
+            work.map((entry) => (
+              <li>
+                <a
+                  href={entry.data.companyWebsite!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex flex-col py-3 px-4 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300 ease-in-out"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="font-semibold truncate">
+                      {entry.data.company}
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      class="size-4 stroke-2 fill-none stroke-current opacity-30 group-hover:opacity-70 transition-all duration-300 ease-in-out -translate-x-1 group-hover:translate-x-0 shrink-0"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </div>
+                  <div class="text-sm opacity-60 mt-0.5">
+                    {entry.data.role}
+                    <span class="opacity-40"> &middot; </span>
+                    {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                  </div>
+                  <div class="text-sm mt-2">{entry.data.description}</div>
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </section>
 

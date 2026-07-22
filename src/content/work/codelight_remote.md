@@ -2,6 +2,7 @@
 company: "Codelight Software Engineering"
 companyWebsite: "https://codelightsoftware.com"
 role: "Full Stack Engineer"
+description: "Built a digital livestock tracking platform with NFC hardware and a file sharing platform using Nuxt.js and Hasura."
 dateStart: "Sep 2024"
 dateEnd: "Jul 2025"
 ---

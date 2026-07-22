@@ -2,6 +2,7 @@
 company: "Codelight Software Engineering"
 companyWebsite: "https://codelightsoftware.com"
 role: "Full Stack Engineer Intern"
+description: "Designed database schemas, APIs, and CMS for a livestock tracking platform with NFC hardware integration."
 dateStart: "May 2024"
 dateEnd: "Sep 2024"
 ---
