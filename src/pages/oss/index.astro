@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import OssCard from "@components/OssCard.astro";
+import { OSS } from "@consts";
+
+const contributions = (await getCollection("oss"))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title={OSS.TITLE} description={OSS.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate font-semibold text-black dark:text-white">
+        {OSS.TITLE}
+      </div>
+      <ul class="flex flex-col gap-3">
+        {
+          contributions.map((entry) => (
+            <li>
+              <OssCard entry={entry} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</PageLayout>

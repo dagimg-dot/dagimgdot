@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  entry: CollectionEntry<"oss">;
+};
+
+const { entry } = Astro.props;
+---
+
+<a
+  href={entry.data.prUrl ?? entry.data.repoUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group flex flex-col py-5 px-5 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300 ease-in-out"
+>
+  <div class="flex items-center justify-between mb-2">
+    <span class="text-xs font-mono opacity-50 truncate">
+      {entry.data.org}/{entry.data.repository.split("/")[1]}
+      &thinsp;·&thinsp;
+      {entry.data.status}
+    </span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      class="size-4 stroke-2 fill-none stroke-current opacity-30 group-hover:opacity-70 transition-all duration-300 ease-in-out -translate-x-1 group-hover:translate-x-0 shrink-0"
+    >
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </div>
+  <div class="font-semibold mb-2 leading-snug">
+    {entry.data.title}
+  </div>
+  <div class="text-sm text-pretty leading-relaxed">
+    {entry.data.description}
+  </div>
+</a>

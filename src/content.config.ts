@@ -27,6 +27,26 @@ const work = defineCollection({
   }),
 });
 
+const oss = defineCollection({
+  loader: glob({
+    pattern: "**/*.md",
+    base: "./src/content/oss",
+    generateId: ({ entry }) => entry.replace(/\.md$/, ""),
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    repository: z.string(),
+    repoUrl: z.string(),
+    prUrl: z.string().optional(),
+    org: z.string(),
+    language: z.string().optional(),
+    status: z.enum(["merged", "open"]),
+    draft: z.boolean().optional(),
+  }),
+});
+
 const projects = defineCollection({
   loader: glob({
     pattern: "**/*.md",
@@ -46,4 +66,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, work, projects };
+export const collections = { blog, work, oss, projects };
