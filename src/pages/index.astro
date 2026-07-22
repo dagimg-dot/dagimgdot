@@ -87,14 +87,16 @@ const work = allwork;
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
-          <Link href="/blog"> See all posts </Link>
+          <h5 class="font-semibold text-black dark:text-white">
+            Recent projects
+          </h5>
+          <Link href="/projects"> See all projects </Link>
         </div>
         <ul class="flex flex-col gap-4">
           {
-            blog.map((post) => (
+            projects.map((project) => (
               <li>
-                <ArrowCard entry={post} />
+                <ArrowCard entry={project} />
               </li>
             ))
           }
@@ -146,16 +148,14 @@ const work = allwork;
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
-          <Link href="/projects"> See all projects </Link>
+          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
+          <Link href="/blog"> See all posts </Link>
         </div>
         <ul class="flex flex-col gap-4">
           {
-            projects.map((project) => (
+            blog.map((post) => (
               <li>
-                <ArrowCard entry={project} />
+                <ArrowCard entry={post} />
               </li>
             ))
           }
