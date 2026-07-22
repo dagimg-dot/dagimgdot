@@ -1,0 +1,157 @@
+---
+interface Language {
+  name: string;
+  svg: string;
+}
+
+const languages: Language[] = [
+  {
+    name: "TypeScript",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 17.5c.32 .32 .754 .5 1.207 .5h.543c.69 0 1.25 -.56 1.25 -1.25v-.25a1.5 1.5 0 0 0 -1.5 -1.5a1.5 1.5 0 0 1 -1.5 -1.5v-.25c0 -.69 .56 -1.25 1.25 -1.25h.543c.453 0 .887 .18 1.207 .5" /><path d="M9 12h4" /><path d="M11 12v6" /><path d="M21 19v-14a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2z" /></svg>`,
+  },
+  {
+    name: "JavaScript",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 4l-2 14.5l-6 2l-6 -2l-2 -14.5z" /><path d="M7.5 8h3v8l-2 -1" /><path d="M16.5 8h-2.5a.5 .5 0 0 0 -.5 .5v3a.5 .5 0 0 0 .5 .5h1.423a.5 .5 0 0 1 .495 .57l-.418 2.93l-2 .5" /></svg>`,
+  },
+  {
+    name: "Python",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9h-7a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h3" /><path d="M12 15h7a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-3" /><path d="M8 9v-4a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v5a2 2 0 0 1 -2 2h-4a2 2 0 0 0 -2 2v5a2 2 0 0 0 2 2h4a2 2 0 0 0 2 -2v-4" /><path d="M11 6l0 .01" /><path d="M13 18l0 .01" /></svg>`,
+  },
+  {
+    name: "Go",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15.695 14.305c1.061 1.06 2.953 .888 4.226 -.384c1.272 -1.273 1.444 -3.165 .384 -4.226c-1.061 -1.06 -2.953 -.888 -4.226 .384c-1.272 1.273 -1.444 3.165 -.384 4.226z" /><path d="M12.68 9.233c-1.084 -.497 -2.545 -.191 -3.591 .846c-1.284 1.273 -1.457 3.165 -.388 4.226c1.07 1.06 2.978 .888 4.261 -.384a3.669 3.669 0 0 0 1.038 -1.921h-2.427" /><path d="M5.5 15h-1.5" /><path d="M6 9h-2" /><path d="M5 12h-3" /></svg>`,
+  },
+  {
+    name: "C++",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 12h4" /><path d="M20 10v4" /><path d="M11 12h4" /><path d="M13 10v4" /><path d="M9 9a3 3 0 0 0 -3 -3h-.5a3.5 3.5 0 0 0 -3.5 3.5v5a3.5 3.5 0 0 0 3.5 3.5h.5a3 3 0 0 0 3 -3" /></svg>`,
+  },
+  {
+    name: "Zig",
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="m23.53 1.02-7.686 3.45h-7.06l-2.98 3.452h7.173L.47 22.98l7.681-3.607h7.065v-.002l2.978-3.45-7.148-.001 12.482-14.9zM0 4.47v14.901h1.883l2.98-3.45H3.451v-8h.942l2.824-3.45H0zm22.117 0-2.98 3.608h1.412v7.844h-.942l-2.98 3.45H24V4.47h-1.883z" /></svg>`,
+  },
+  {
+    name: "Bash",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9l3 3l-3 3" /><path d="M13 15l3 0" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /></svg>`,
+  },
+];
+---
+
+<div class="language-strip">
+  <h5 class="strip-heading">Languages I work with</h5>
+  <ul class="language-marks" role="list" aria-label="Programming languages">
+    {
+      languages.map((lang) => (
+        <li class="language-mark" aria-label={lang.name}>
+          <span class="language-mark__icon" set:html={lang.svg} />
+          <span class="language-mark__name">{lang.name}</span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .language-strip {
+    margin-top: 1.5rem;
+  }
+
+  .strip-heading {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.015em;
+    color: rgba(0, 0, 0, 0.45);
+    margin-bottom: 0.625rem;
+  }
+
+  :global(html.dark) .strip-heading {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .language-marks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .language-mark {
+    display: flex;
+    align-items: center;
+    gap: 0.3125rem;
+    padding: 0.3125rem 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    background: transparent;
+    cursor: default;
+    user-select: none;
+    transition: border-color 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .language-mark__icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .language-mark__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .language-mark__name {
+    font-size: 0.8125rem;
+    font-weight: 450;
+    color: rgba(0, 0, 0, 0.45);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .language-mark:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  .language-mark:active {
+    transform: scale(0.97);
+    transition: transform 100ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  :global(html.dark) .language-mark {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  :global(html.dark) .language-mark__name {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  :global(html.dark) .language-mark:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .language-mark:active {
+      transition: transform 100ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .language-marks {
+      gap: 0.3125rem;
+    }
+    .language-mark {
+      padding: 0.25rem 0.4375rem;
+    }
+    .language-mark__icon {
+      width: 14px;
+      height: 14px;
+    }
+    .language-mark__name {
+      font-size: 0.75rem;
+    }
+  }
+</style>

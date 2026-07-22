@@ -7,6 +7,7 @@ import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import OssCard from "@components/OssCard.astro";
 import Link from "@components/Link.astro";
+import LanguageStrip from "@components/LanguageStrip.astro";
 import { SITE, HOME, SOCIALS, OSS } from "@consts";
 
 const blog = (await getCollection("blog"))
@@ -81,6 +82,7 @@ const work = allwork;
             .
           </p>
         </article>
+        <LanguageStrip />
       </section>
 
       <section class="animate space-y-6">
