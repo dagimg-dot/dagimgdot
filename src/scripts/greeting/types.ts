@@ -32,8 +32,8 @@ export const CONFIG = {
   CACHE_TTL_MS: 24 * 60 * 60 * 1000,
   ELEMENT_ID: "greeting-text",
   DECIPHER: {
-    DURATION_MS: 1800,
-    TICK_INTERVAL_MS: 40,
-    START_DELAY_MS: 600,
+    DURATION_MS: 1400,
+    TICK_INTERVAL_MS: 65,
+    START_DELAY_MS: 500,
   },
 } as const;
