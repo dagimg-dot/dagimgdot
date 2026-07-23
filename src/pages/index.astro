@@ -40,7 +40,9 @@ const work = allwork;
   <Container>
     <div class="animate flex items-center justify-between">
       <h4 class="font-semibold text-black dark:text-white">
-        ሰላም, I'm Dagim G. Astatkie <span class="text-xl waving-hand">👋🏻</span>
+        <span id="greeting-text">Hello</span>, I'm Dagim G. Astatkie <span
+          class="text-xl waving-hand">👋🏻</span
+        >
       </h4>
       <div class="profile-image-container">
         <Image
@@ -296,3 +298,8 @@ const work = allwork;
     }
   }
 </style>
+
+<script>
+  import { initGreeting } from "@scripts/greeting";
+  document.addEventListener("DOMContentLoaded", initGreeting);
+</script>
