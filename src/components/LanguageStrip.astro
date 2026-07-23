@@ -36,7 +36,7 @@ const languages: Language[] = [
 ];
 ---
 
-<div class="language-strip">
+<div class="language-strip animate">
   <h5 class="strip-heading">Languages I work with</h5>
   <ul class="language-marks" role="list" aria-label="Programming languages">
     {
@@ -86,7 +86,11 @@ const languages: Language[] = [
     background: transparent;
     cursor: default;
     user-select: none;
-    transition: border-color 200ms cubic-bezier(0.23, 1, 0.32, 1);
+
+    transition:
+      border-color 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .language-mark__icon {
@@ -96,6 +100,7 @@ const languages: Language[] = [
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .language-mark__icon :global(svg) {
@@ -110,15 +115,29 @@ const languages: Language[] = [
     color: rgba(0, 0, 0, 0.45);
     line-height: 1;
     letter-spacing: 0.01em;
+    transition: color 200ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .language-mark:hover {
-    border-color: rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  }
+
+  .language-mark:hover .language-mark__icon {
+    transform: rotate(12deg) scale(1.15);
+  }
+
+  .language-mark:hover .language-mark__name {
+    color: rgba(0, 0, 0, 0.65);
   }
 
   .language-mark:active {
-    transform: scale(0.97);
-    transition: transform 100ms cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
+    transition:
+      transform 100ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 100ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   :global(html.dark) .language-mark {
@@ -130,12 +149,24 @@ const languages: Language[] = [
   }
 
   :global(html.dark) .language-mark:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  :global(html.dark) .language-mark:hover .language-mark__name {
+    color: rgba(255, 255, 255, 0.8);
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .language-mark:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .language-mark:hover .language-mark__icon {
+      transform: none;
+    }
     .language-mark:active {
-      transition: transform 100ms cubic-bezier(0.23, 1, 0.32, 1);
+      transform: none;
     }
   }
 
